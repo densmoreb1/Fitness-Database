@@ -1,5 +1,5 @@
 import sqlite3
-from sqlite3.dbapi2 import connect
+import sqlite3
 
 def create_db(sql_file, database_name):
     sql_script = open(sql_file)
