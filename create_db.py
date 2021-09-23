@@ -1,5 +1,4 @@
 import sqlite3
-import sqlite3
 
 def create_db(sql_file, database_name):
     sql_script = open(sql_file)
