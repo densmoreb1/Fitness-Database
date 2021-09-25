@@ -11,3 +11,5 @@ def create_db(sql_file, database_name):
 
     connection.commit()
     connection.close()
+
+create_db('/Users/densmoreb/Documents/myprojects/sqlite_project/fitness.sql', 'fitness')

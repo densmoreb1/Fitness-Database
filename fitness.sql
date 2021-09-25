@@ -1,11 +1,12 @@
-DROP TABLE IF EXISTS [Users];
-DROP TABLE IF EXISTS [Exercises];
-DROP TABLE IF EXISTS [User_workouts];
+DROP TABLE IF EXISTS [users];
+DROP TABLE IF EXISTS [exercises];
+DROP TABLE IF EXISTS [user_workouts];
 
 
 CREATE TABLE [users]
 (
     [user_id] INTEGER PRIMARY KEY NOT NULL,
+    [user_name] TEXT NOT NULL,
     [password] TEXT NOT NULL,
     [first_name] TEXT NOT NULL,
     [last_name] TEXT
@@ -24,6 +25,9 @@ CREATE TABLE [user_workouts]
     [date] DATETIME NOT NULL,
     [user_id] INTEGER NOT NULL,
     [exercise_id] INTEGER NOT NULL,
+    [sets] INTEGER NOT NULL,
+    [reps] INTEGER NOT NULL,
+    [weight] INTEGER,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (exercise_id) REFERENCES  exercises(exercise_id)
 );
