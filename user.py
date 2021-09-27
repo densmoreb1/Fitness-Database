@@ -11,11 +11,13 @@ class user():
 
     def get_credentials(self, values):
         """ This function gets the username and password from the fitness database and returns them """
+
         self.cursor.execute('SELECT user_name FROM users WHERE user_name = (?)', values)
         db_user = self.cursor.fetchall()
         self.cursor.execute('SELECT password FROM users WHERE user_name = (?)', values)
         db_pass = self.cursor.fetchall()
         return db_user[0][0], db_pass[0][0]
+
     
     def login(self):
         """ When run, the user will login in with their password and user name"""
@@ -57,18 +59,36 @@ class user():
                 sets = input('sets: ')
                 reps = input('reps: ')
                 weight = input('weight: ')
-                values = (self.username, exercise, sets, reps, weight)
-                self.cursor.execute('''
-                INSERT INTO user_workouts(date, user_id, exercise_id, sets, reps, weight) VALUES 
-                (
-                    (SELECT DATETIME())
-                ,   (SELECT user_id FROM users WHERE user_name = 'densmoreb')
-                ,   (SELECT exercise_id FROM exercises WHERE exercise_name = 'bench press')
-                ,   ?
-                ,   ?
-                ,   ?
-                );''', values)
-                choice = input('another exercise? ')
-                choice.lower()
+                self.cursor.execute("SELECT exercise_name FROM exercises WHERE exercise_name = (?)", exercise)
+                if self.cursor.fetchall():
+                        values = (self.username, exercise, sets, reps, weight)
+                        self.cursor.execute('''
+                        INSERT INTO user_workouts(date, user_id, exercise_id, sets, reps, weight) VALUES 
+                        (
+                            (SELECT DATETIME())
+                        ,   (SELECT user_id FROM users WHERE user_name = ?)
+                        ,   (SELECT exercise_id FROM exercises WHERE exercise_name = ?)
+                        ,   ?
+                        ,   ?
+                        ,   ?
+                        )''', values)
+                        self.connection.commit()
+                        choice = input('another exercise? ')
+                        choice.lower()
+                else:
+                    self.add_exercise(exercise)
+
+                
         if choice == 'n':
             print('you are lazy')
+
+    def add_exercise(self, exercise):
+        choice = input('The exercise does not exists currently. Would you like to add it? y or n ')
+        choice.lower()
+        if choice == 'y':
+            descri = input('enter a description: ')
+            values = exercise, descri
+            self.cursor.execute('INSERT INTO exercises (exercise_name, description) VALUES ?, ?', values)
+            self.connection.commit()
+        else:
+            print('wrong')
