@@ -22,7 +22,7 @@ CREATE TABLE [exercises]
 CREATE TABLE [user_workouts]
 (
     [workout_id] INTEGER PRIMARY KEY NOT NULL,
-    [date] DATETIME NOT NULL,
+    [date] DATE NOT NULL,
     [user_id] INTEGER NOT NULL,
     [exercise_id] INTEGER NOT NULL,
     [sets] INTEGER NOT NULL,

@@ -121,11 +121,12 @@ class user():
                 JOIN exercises
                     ON user_workouts.exercise_id = exercises.exercise_id
                 JOIN users
-                    ON users.user_id = exercises.exercise_id
-            WHERE users.user_id =  ? and date = ?
+                    ON users.user_id = user_workouts.user_id
+            WHERE users.user_name =  ? and date = ?
             ''', values)
         results = self.cursor.fetchall()
-        print(results)
+        for i in results:
+            print(f'{i[0]}, {i[1]} sets x {i[2]} reps with {i[3]}lbs')
 
     def main_menu(self):
         # option of viewing, adding workout or exercise
