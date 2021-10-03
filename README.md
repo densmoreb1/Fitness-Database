@@ -4,7 +4,7 @@ This is a low-level fitness app. This was a project to help me learn about using
 
 The program allows the user to tracks the workouts they did. They are able to login, view a workout, and add a workout.
 
-[Fitness App Demo Video](http://youtube.link.goes.here)
+[Fitness App Demo Video](https://youtu.be/ACZWa5jRrYU)
 
 # Relational Database
 
