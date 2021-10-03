@@ -44,7 +44,7 @@ class user():
                         values1 = (username, password, first_name, last_name)
                         self.cursor.execute('INSERT INTO users(user_name, password, first_name, last_name) VALUES (?, ?, ?, ?)', values1)
                         self.connection.commit()
-                        self.main_menu()
+                        # self.main_menu()
                     else:
                         print('try again\n')
                         count += 1
@@ -59,11 +59,11 @@ class user():
                 values1 = (username, password, first_name, last_name)
                 self.cursor.execute('INSERT INTO users(user_name, password, first_name, last_name) VALUES (?, ?, ?, ?)', values1)
                 self.connection.commit()
-                self.main_menu()
             elif choice == 'q':
                 choice = 'q'
             else:
                 print('incorrect response\n')
+        self.main_menu()
 
     def add_workout(self):
         choice = None
@@ -140,6 +140,8 @@ class user():
             elif choice == 'e':
                 self.add_exercise()
             elif choice == 'q':
+                self.connection.commit()
+                self.connection.close()
                 quit()
             else:
                 print('must choose v, w, e, or q')
