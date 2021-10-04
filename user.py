@@ -22,7 +22,11 @@ class user():
             
     
     def login(self):
-        """ When run, the user will login in with their password and user name"""
+        """
+        When run, the user will login in with their password and user name. 
+        If the username does not exist, the user can create one.
+        When the login is successful, the main menu function is run.
+        """
         choice = None
         while choice != 'q':
             choice = input('welcome to fitness db \nlogin(l), create user(c), or quit(q) ')
@@ -66,6 +70,10 @@ class user():
         self.main_menu()
 
     def add_workout(self):
+        """
+        When this option is picked from the main menu, the user can add a workout they did today.
+        The database will use today's date so it can be viewed at a later time.
+        """
         choice = None
         while choice != 'n':
             choice = input('did you workout today?(y or n) ')
@@ -100,6 +108,10 @@ class user():
             # choice = 'n'
 
     def add_exercise(self):
+        """
+        If an exercise that the user entered does not exist, 
+        this will ask for details and then insert it into the database.
+        """
         choice = input('add an exercise? ')
         choice.lower()
         if choice == 'y':
@@ -113,6 +125,9 @@ class user():
             ('returning to main menu')
 
     def view_workout(self):
+        """
+        This function runs a select statement on the database with the username and date to return a workout on a specified date
+        """
         # view exercise_name, sets, reps, weight where the username = 
         date = input('enter the date of the workout you would like to see (YYYY-MM-DD) ' )
         values = (self.username, date)
